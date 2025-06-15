@@ -1,8 +1,8 @@
-# module-BKZ
+# Module-BKZ
 Artifact for the paper _Predicting Module-Lattice Reduction_
 Léo Ducas, Lynn Engelberts, Paola de Perthuis 
 
-pre-pre-print included on this repository. Pre-print soon available on IACR eprint archive.
+Pre-pre-print included on this repository. Pre-print soon available on IACR eprint archive.
 
 ## Integrated artifacts
 
@@ -20,15 +20,16 @@ cd g6k
 PYTHON=python3 ./bootstrap.sh
 cd ..
 ```
-To run the python scripts, you will need to activate the virtual environment with
+To run the python scripts, you will need to activate the virtual environment using:
 ```
 cd g6k
 source ./activate
 cd ..
 ```
-## Running Experiments, examples
 
-To generate a csv file with the profile of mBKZ over Q(ω_3), Q-dimension 120, after 5 tours of BKZ-12 run:
+## Running experiments, examples
+
+To generate a csv file with the profile of mBKZ over Q(ω_3), Q-dimension 120, after 5 tours of BKZ-12, run:
 ```
 python exp_profile.py c=3 m=120 beta=12 tours=5
 ```
@@ -37,7 +38,6 @@ To measure the slope of mBKZ over Q(ω_3) for increasing blocksizes, Q-dimension
 ```
 python exp_slope.py c=3 m=80
 ```
-
 
 To measure and predict the skewness over Q(ω_5) and index for increasing rank, run:
 ```
@@ -49,16 +49,14 @@ To measure and predict the Gaussian Heuristic over Q(ω_5) and index for increas
 python exp_module_gh.py c=5 samples=50
 ```
 
-## Reproducing Predictions and Experiments from the paper
+## Reproducing predictions and experiments from the paper
 
-The predicted gains on the blocksize (Fig 2) are generated with script `pred_gain.py`.
+The predicted gains on the blocksize (Fig. 2) are generated with the script `pred_gain.py`.
 
-The extensive experiments from the paper are launched via the `bash` scripts
-`allexp_slope.sh` (Fig 1), `allexp_profile.sh` (Fig 4), `allexp_module_gh.sh` (Fig 5), and `allexp_skewness_index.sh` (Fig 6 & 7), which will store data in a `data` subfolders. For the profile and slope data, one datafile per experiment is generated, and can be averaged using a script `average.py` in the corresponding `data` subfolder. The slope averaging script also appends predictions to the experimental average for comparison.
+The extensive experiments from the paper are launched via the `bash` scripts 
+`allexp_slope.sh` (Fig. 1), `allexp_profile.sh` (Fig. 4), `allexp_module_gh.sh` (Fig. 5), and `allexp_skewness_index.sh` (Fig. 6 & 7), which will store data in a `data` subfolder. For the profile and slope data, one datafile per experiment is generated, and can be averaged using a script `average.py` in the corresponding `data` subfolder. The slope averaging script also appends predictions to the experimental average for comparison.
 
 These bash scripts will launch up to 35 parallel processes, be sure to use them on a computational server that can handle such load! 
-
-
 
 ## Core implementation files
 
