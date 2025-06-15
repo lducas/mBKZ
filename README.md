@@ -54,7 +54,7 @@ python exp_module_gh.py c=5 samples=50
 The predicted gains on the blocksize (Fig. 2) are generated with the script `pred_gain.py`.
 
 The extensive experiments from the paper are launched via the `bash` scripts 
-`allexp_slope.sh` (Fig. 1), `allexp_profile.sh` (Fig. 4), `allexp_module_gh.sh` (Fig. 5), and `allexp_skewness_index.sh` (Fig. 6 & 7), which will store data in a `data` subfolder. For the profile and slope data, one datafile per experiment is generated, and can be averaged using a script `average.py` in the corresponding `data` subfolder. The slope averaging script also appends predictions to the experimental average for comparison.
+`allexp_slope.sh` (Fig. 1), `allexp_profile.sh` (Fig. 4), `allexp_module_gh.sh` (Fig. 5), and `allexp_skewness_index.sh` (Fig. 7 & 8), which will store data in a `data` subfolder. For the profile and slope data, one datafile per experiment is generated, and can be averaged using a script `average.py` in the corresponding `data` subfolder. The slope averaging script also appends predictions to the experimental average for comparison.
 
 These bash scripts will launch up to 35 parallel processes, be sure to use them on a computational server that can handle such load! 
 
