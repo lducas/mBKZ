@@ -1,8 +1,8 @@
 # Module-BKZ
 Artifact for the paper _Predicting Module-Lattice Reduction_
-Léo Ducas, Lynn Engelberts, Paola de Perthuis 
+by Léo Ducas, Lynn Engelberts and Paola de Perthuis. 
 
-Pre-pre-print included on this repository (`mBKZ.pdf`). Pre-print soon available on IACR eprint archive.
+Pre-pre-print included on this repository (`mBKZ.pdf`). Pre-print soon available on IACR eprint archive. Slides presenting this work may be found in the slides directory. 
 
 ## Integrated artifacts
 
