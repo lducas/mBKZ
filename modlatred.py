@@ -105,8 +105,8 @@ class ModuleLatticeReduction(Siever):
 
     def is_structured_at(self, kappa, end=None, ret_w=False):
         """
-        Test wether the basis has the adequate module structure at position kappa,
-        that is check wether, after projection, the vectors B[kappa .. kappa+deg-1]
+        Test whether the basis has the adequate module structure at position kappa,
+        that is check whether, after projection, the vectors B[kappa .. kappa+deg-1]
         indeed form the basis of a rank-1 module. (Section 3.3)
 
         This is done by checking that B[kappa] * O_K is a sublattice of 
@@ -136,7 +136,7 @@ class ModuleLatticeReduction(Siever):
 
     def is_structured(self):
         """
-        Test wether the basis is structured at all position
+        Test whether the basis is structured at all position
         :return: a boolean
         """
         if self.K.deg==1:
