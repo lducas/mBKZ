@@ -136,7 +136,7 @@ class ModuleLatticeReduction(Siever):
 
     def is_structured(self):
         """
-        Test whether the basis is structured at all position
+        Test whether the basis is structured at all positions
         :return: a boolean
         """
         if self.K.deg==1:
@@ -229,8 +229,8 @@ class ModuleLatticeReduction(Siever):
         Run SVP reduction at position kappa while maintaining the module structure
         :param kappa: position
         :param beta: blocksize (expressed as a Q-rank, not a K-rank)
-        :param full_restructure: Restructure all affected position. The alternative
-        is to restructured only at kappa, which is a viable optimization inside BKZ
+        :param full_restructure: Restructure all affected positions. The alternative
+        is to restructure only at kappa, which is a viable optimization inside BKZ
         as the next position will be broken and repaired again by the next SVP call 
         """
         self.position_check(kappa)
