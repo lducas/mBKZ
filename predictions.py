@@ -15,11 +15,11 @@ def lVball(n):
 def lghZ(n):
     """
     Logarithmic Gaussian Heuristic for Z-lattices (Section 3.1)
-    Formula from Theorem 1 of https://eprint.iacr.org/2018/856
+    Formula derived from Theorem 1 of https://eprint.iacr.org/2018/856
     :param n: dimension n of the lattice
     "returns: lgh_Q(n)
     """    
-    return log(2)/n + lgamma(1+1/n) - lVball(n)/n
+    return (log(2) - np.euler_gamma - lVball(n))/n
 
 def lghK(K, r):
     """
