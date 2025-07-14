@@ -1,9 +1,9 @@
 from numpy.fft import fft, ifft
-from numpy import array, allclose, rint, zeros, reshape, roll, prod, sqrt
+from numpy import array, allclose, rint, zeros, reshape, roll, prod, sqrt, polymul, polydiv
 from numpy.random import normal
 from cyclo_primes_precomp import cyclo_primes
 from math import pi, log
-
+from cmath import exp
 def primefac(n):
     """
     Computes the prime factorization of n.
@@ -75,6 +75,13 @@ class Cyclotomic:
         # Construct the Cyclic Embedding of 0 and 1
         self.zero = zeros(self.cond, dtype="int")
         self.one = self.cyclic_embedding([1]+(self.deg-1)*[0])
+        pol = [1]
+        w = exp(2j *pi / c)
+        for i in self.primitiveroots:
+            pol = polymul(pol, [1, -w**i])
+        pol_ = array(rint(pol.real), dtype="int")
+        assert(allclose(pol, pol_))
+        self.defpoly = pol_
 
     def is_invertible_mod_cond(self, i):
         """
@@ -124,6 +131,18 @@ class Cyclotomic:
         if self.debug:
             self.check_cyclic_embedding(v)
         return v_
+
+    def reduce_mod_defpoly(self, x):
+        """
+        Reduce modulo the defining polynomial of the field K. 
+        Can be used to convert cyclic embedding to coefficient embedding.
+        :param x: a polynomial, as an integer list or array of coefficients
+        :returns: x modulo self.defpoly, as an array of length self.d
+        """
+        q, r = polydiv(x[::-1], self.defpoly)
+        res = zeros(self.deg, dtype="int")
+        res[:len(r)] = r[::-1]
+        return res
 
 
     def spherical_sample(self, r, sigma = 100.):
@@ -233,7 +252,10 @@ class Cyclotomic:
 
     def vOK_Zbasis(self, v):
         """
-        Returns a Z-basis of the ideal v * O_K for an input vector v ∈ K^r
+        Returns a Z-basis of the ideal v * O_K for an input vector v ∈ K^r.
+        We here use the power-basis of cyclotomics: B = [v, v*X, v*X^2, ... , v*X^{deg-1}],
+        and this guarentee is used to construct LWE samples.
+
         :param v: v ∈ K^r, represented in the Cyclic Embedding
         :returns: a list of K.deg elements of v ∈ K^r, reprensented in the Cyclic Embedding
         as a matrix of dimension K.deg x (r*K.cond)
@@ -268,37 +290,52 @@ class Cyclotomic:
 
 # Run some unit checks if not initialized from an import statement.
 if __name__ == '__main__':
-    for c in range(7, 40):
+    for c in range(3, 40):
         if c%4 == 2:
-            continue 
+            continue
+
+
         K = Cyclotomic(c, debug=True)
+        
         X = K.cyclic_embedding([0,1]+(K.deg-2)*[0])
-        X2 = K.cyclic_embedding([0,0,1]+(K.deg-3)*[0])
         one = K.cyclic_embedding([1]+(K.deg-1)*[0])
         # Do the cyclic convolution to compute the product, with adequate rescaling
-        X_2 = array(rint(ifft(fft(X)*fft(X)).real /K.cond), dtype ="int")
-
-        # A check that the Cyclic Embedding if X squared is indeed
-        # (a scaling of) the Cyclic Embedding of X^2
-        assert((X2==X_2).all())
+        if K.deg > 3:
+            X2 = K.cyclic_embedding([0,0,1]+(K.deg-3)*[0])
+            X_2 = array(rint(ifft(fft(X)*fft(X)).real /K.cond), dtype ="int")
+            # A check that the Cyclic Embedding if X squared is indeed
+            # (a scaling of) the Cyclic Embedding of X^2
+            assert((X2==X_2).all())
 
         # Check some algebraic norms
         assert(allclose(K.algebraic_norm(one), 1))
         assert(allclose(K.algebraic_norm(2*one), 2**K.deg))
         assert(allclose(K.algebraic_norm(X), 1))
-        assert(allclose(K.algebraic_norm(X2), 1))
+        if K.deg > 3:
+            assert(allclose(K.algebraic_norm(X2), 1))
 
         # If the conductor is prime power p^k, then the element 1-X should have
         # algebraic norm p
         if len(K.pfs)==1:
             assert(allclose(K.algebraic_norm(one - X), list(K.pfs)[0]))
         # And so should 1-X^2 if p is odd
-        if len(K.pfs)==1 and (K.cond%2):
+        if len(K.pfs)==1 and (K.cond%2) and (K.deg > 3):
             assert(allclose(K.algebraic_norm(one - X2), list(K.pfs)[0]))
 
         # The trace of 1 is the degree, and other identities 
         assert(K.trace(one)==K.deg)
         assert((K.ip_K(one, one) == one).all())
         assert((K.ip_K(X, one) == X).all())
+
+        # Check that reduce_mod_defpoly is the inverse of coefficient_embedding
+        for test in range(10):
+            x = K.spherical_sample(1, sigma=3)
+            y = K.reduce_mod_defpoly(x)
+            yy = K.reduce_mod_defpoly(y)
+            assert((y==yy).all())
+            xx = K.cyclic_embedding(y)//K.cond
+            assert((x==xx).all())
+
+
 
     print("Cyclotomic tests all passed.")
