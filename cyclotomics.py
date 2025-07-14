@@ -76,9 +76,9 @@ class Cyclotomic:
         self.zero = zeros(self.cond, dtype="int")
         self.one = self.cyclic_embedding([1]+(self.deg-1)*[0])
         pol = [1]
-        w = exp(2j *pi / c)
+        w = exp(2j *pi / self.cond)
         for i in self.primitiveroots:
-            pol = polymul(pol, [1, -w**i])
+            pol = polymul(pol, [-w**i, 1])
         pol_ = array(rint(pol.real), dtype="int")
         assert(allclose(pol, pol_))
         self.defpoly = pol_
@@ -139,7 +139,10 @@ class Cyclotomic:
         :param x: a polynomial, as an integer list or array of coefficients
         :returns: x modulo self.defpoly, as an array of length self.d
         """
-        q, r = polydiv(x[::-1], self.defpoly)
+
+        # Note that numpy polynomial use high coefficient first convention
+        # but we use low coefficient first, hence the following reversing [::-1]
+        q, r = polydiv(x[::-1], self.defpoly[::-1])
         res = zeros(self.deg, dtype="int")
         res[:len(r)] = r[::-1]
         return res
