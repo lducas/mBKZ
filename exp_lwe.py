@@ -14,7 +14,7 @@ from modlatred import random_qary_cyclotomic, ModuleLatticeReduction, slope, Z
 ld = "ld"
 dd = "dd"
 c = 3
-n = 40
+n = 80
 q = 16317
 ft = "ld"
 struct = False
@@ -35,7 +35,7 @@ T0 = time()
 Tlast = time()
 
 tot = 0
-sigma = 10
+sigma = 2
 s = K.spherical_sample(n//d, sigma=sigma)
 e = K.spherical_sample(n//d, sigma=sigma)
 
@@ -58,9 +58,10 @@ t = t.flatten()
 t0 = concatenate((t, zeros(c*n//d, dtype=int)))
 B_ = block([[B, Z(2*n, c)], [K.vOK_Zbasis(t0), K.vOK_Zbasis(K.one)]])
 # print(B_)
+norm2 = (s@s) + (e@e)
+
 if verb:
     print("e|s :", e, s)
-    norm2 = (s@s) + (e@e)
     print("norm^2:", norm2)
 
 if struct:
