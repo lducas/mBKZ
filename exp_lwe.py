@@ -13,11 +13,12 @@ from modlatred import random_qary_cyclotomic, ModuleLatticeReduction, slope, Z
 
 ld = "ld"
 dd = "dd"
-c = 1
-n = 60
+c = 3
+n = 40
 q = 16317
 ft = "ld"
 struct = False
+verb = True
 
 for s in sys.argv[1:]:
     exec(s)
@@ -28,31 +29,39 @@ assert(m % K.deg == 0)
 assert(n % K.deg == 0)
 d = K.deg
 
-print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}", file=sys.stderr)
+if verb:
+    print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}, struct={struct}", file=sys.stderr)
 T0 = time()
 Tlast = time()
 
 tot = 0
-sigma = 8
+sigma = 10
 s = K.spherical_sample(n//d, sigma=sigma)
 e = K.spherical_sample(n//d, sigma=sigma)
 
 B = random_qary_cyclotomic(K, m//d, n//d, q)
 A = B[n:, :c*n//d]
 
-# print(B)
-# print(A)
 s_ = reshape(s, (len(s)//c, c))
-s_ = apply_along_axis(K.reduce_mod_defpoly, 1, s_)
+s_ = apply_along_axis(K.reduce_mod_defpoly, 1, s_)//c
 s_ = s_.flatten()
 
-t = (s_ @ A + e) % q
+t = (s_ @ A + e)
+t = reshape(t, (len(t)//c, c))
+t = apply_along_axis(K.reduce_mod_defpoly, 1, t)//c
+t = t % q
+t = apply_along_axis(K.cyclic_embedding, 1, t)
+t = t.flatten()
+
+
+
 t0 = concatenate((t, zeros(c*n//d, dtype=int)))
 B_ = block([[B, Z(2*n, c)], [K.vOK_Zbasis(t0), K.vOK_Zbasis(K.one)]])
-
-# print("e|s :", e, s)
-norm2 = (s@s) + (e@e)
-# print("norm^2:", norm2)
+# print(B_)
+if verb:
+    print("e|s :", e, s)
+    norm2 = (s@s) + (e@e)
+    print("norm^2:", norm2)
 
 if struct:
     mlr = ModuleLatticeReduction(B_, K, float_type=ft, restructure_delta_prog=.03)
@@ -68,16 +77,18 @@ ad = d if struct else 1
 
 tours = 5*ad
 for beta in range(ceil(3/ad)*ad, 81, ad):
-    print(beta)
-    v = array(mlr.M.B[0])[:-1]
+    v = array(mlr.M.B[0])[:c*m//d]
     if (v @ v) == norm2:
         break
+    if verb:
+        print(f"Running mBKZ_{mlr.K.cond} beta={beta}")
     mlr.bkz(beta, tours)
     mlr.lll(0, m+d)
     mlr.restructure()
 
-print("done")
+#print("done")
 print(beta - ad)
 # print("stopped before beta=", beta)
-# print("found norm", v @ v)
-# print(v)
+if verb:
+    print("found norm", v @ v)
+    print("vector", v)
