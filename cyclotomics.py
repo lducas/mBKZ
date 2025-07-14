@@ -235,7 +235,7 @@ class Cyclotomic:
         """
         Returns a Z-basis of the ideal v * O_K for an input vector v ∈ K^r
         :param v: v ∈ K^r, represented in the Cyclic Embedding
-        :returns: a list of K.deg elements of v ∈ K^r, reprensented in the Cyclic Embedding
+        :returns: a list of K.deg elements of v ∈ K^r, represented in the Cyclic Embedding
         as a matrix of dimension K.deg x (r*K.cond)
         """     
 
