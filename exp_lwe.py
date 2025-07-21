@@ -14,14 +14,18 @@ from modlatred import random_qary_cyclotomic, ModuleLatticeReduction, slope, Z
 ld = "ld"
 dd = "dd"
 c = 3
-n = 80
+n = 20
 q = 16317
 ft = "ld"
-struct = False
+mBKZ = False
+mKannan = False
 verb = True
 
 for s in sys.argv[1:]:
     exec(s)
+
+if mBKZ:
+    assert(mKannan)
 
 K = Cyclotomic(c)
 m = 2*n
@@ -57,6 +61,10 @@ t = t.flatten()
 
 t0 = concatenate((t, zeros(c*n//d, dtype=int)))
 B_ = block([[B, Z(2*n, c)], [K.vOK_Zbasis(t0), K.vOK_Zbasis(K.one)]])
+
+if not mKannan:
+    B_ = B[:m+1]
+
 # print(B_)
 norm2 = (s@s) + (e@e)
 
