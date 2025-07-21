@@ -72,7 +72,7 @@ if verb:
     print("e|s :", e, s)
     print("norm^2:", norm2)
 
-if struct:
+if mBKZ:
     mlr = ModuleLatticeReduction(B_, K, float_type=ft, restructure_delta_prog=.03)
 else:
     Q = Cyclotomic(1)
@@ -82,7 +82,7 @@ for t in range(5):
     mlr.lll(0, m+d)
     mlr.restructure()
 
-ad = d if struct else 1
+ad = d if mBKZ else 1
 
 tours = 5*ad
 for beta in range(ceil(3/ad)*ad, 81, ad):
