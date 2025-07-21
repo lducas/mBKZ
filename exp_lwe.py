@@ -34,7 +34,7 @@ assert(n % K.deg == 0)
 d = K.deg
 
 if verb:
-    print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}, mBKZ={mBKZ}, , mBKZ={mKannan}", file=sys.stderr)
+    print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}, mBKZ={mBKZ}, , mKannan={mKannan}", file=sys.stderr)
 T0 = time()
 Tlast = time()
 
@@ -68,15 +68,17 @@ if not mKannan:
 # print(B_)
 norm2 = (s@s) + (e@e)
 
-if verb:
-    print("e|s :", e, s)
-    print("norm^2:", norm2)
-
 if mBKZ:
     mlr = ModuleLatticeReduction(B_, K, float_type=ft, restructure_delta_prog=.03)
 else:
     Q = Cyclotomic(1)
     mlr = ModuleLatticeReduction(B_, Q, float_type=ft, restructure_delta_prog=.03)
+
+if verb:
+    print("e|s :", e, s)
+    print("norm^2:", norm2)
+    print("dim = ", mlr.M.d)
+
 
 for t in range(5):
     mlr.lll(0, mlr.M.d)
@@ -89,7 +91,7 @@ for beta in range(ceil(3/ad)*ad, 81, ad):
     v = array(mlr.M.B[0])[:c*m//d]
     if (v @ v) == norm2:
         break
-    print(f"Running mBKZ_{mlr.K.cond} beta={beta} (mBKZ={mBKZ}, mBKZ={mKannan})", file=sys.stderr)
+    print(f"Running mBKZ_{mlr.K.cond} beta={beta} (mBKZ={mBKZ}, mKannan={mKannan})", file=sys.stderr)
     mlr.bkz(beta, tours)
     mlr.lll(0, mlr.M.d)
     mlr.restructure()
