@@ -79,7 +79,7 @@ else:
     mlr = ModuleLatticeReduction(B_, Q, float_type=ft, restructure_delta_prog=.03)
 
 for t in range(5):
-    mlr.lll(0, m+d)
+    mlr.lll(0, mlr.M.d)
     mlr.restructure()
 
 ad = d if mBKZ else 1
