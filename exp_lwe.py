@@ -34,7 +34,7 @@ assert(n % K.deg == 0)
 d = K.deg
 
 if verb:
-    print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}, struct={struct}", file=sys.stderr)
+    print(f"m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}, mBKZ={mBKZ}, , mBKZ={mKannan}", file=sys.stderr)
 T0 = time()
 Tlast = time()
 
@@ -89,8 +89,7 @@ for beta in range(ceil(3/ad)*ad, 81, ad):
     v = array(mlr.M.B[0])[:c*m//d]
     if (v @ v) == norm2:
         break
-    if verb:
-        print(f"Running mBKZ_{mlr.K.cond} beta={beta}")
+    print(f"Running mBKZ_{mlr.K.cond} beta={beta} (mBKZ={mBKZ}, mBKZ={mKannan})", file=sys.stderr)
     mlr.bkz(beta, tours)
     mlr.lll(0, m+d)
     mlr.restructure()
