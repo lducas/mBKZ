@@ -91,7 +91,7 @@ for beta in range(ceil(3/ad)*ad, 81, ad):
         break
     print(f"Running mBKZ_{mlr.K.cond} beta={beta} (mBKZ={mBKZ}, mBKZ={mKannan})", file=sys.stderr)
     mlr.bkz(beta, tours)
-    mlr.lll(0, m+d)
+    mlr.lll(0, mlr.M.d)
     mlr.restructure()
 
 #print("done")
