@@ -63,7 +63,7 @@ t0 = concatenate((t, zeros(c*n//d, dtype=int)))
 B_ = block([[B, Z(2*n, c)], [K.vOK_Zbasis(t0), K.vOK_Zbasis(K.one)]])
 
 if not mKannan:
-    B_ = B[:m+1]
+    B_ = B_[:m+1]
 
 # print(B_)
 norm2 = (s@s) + (e@e)
