@@ -260,7 +260,7 @@ class Cyclotomic:
         and this guarentee is used to construct LWE samples.
 
         :param v: v ∈ K^r, represented in the Cyclic Embedding
-        :returns: a list of K.deg elements of v ∈ K^r, reprensented in the Cyclic Embedding
+        :returns: a list of K.deg elements of v ∈ K^r, represented in the Cyclic Embedding
         as a matrix of dimension K.deg x (r*K.cond)
         """     
 
