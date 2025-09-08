@@ -4,6 +4,7 @@ from numpy.random import normal
 from cyclo_primes_precomp import cyclo_primes
 from math import pi, log
 from cmath import exp
+
 def primefac(n):
     """
     Computes the prime factorization of n.
