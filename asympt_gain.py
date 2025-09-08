@@ -9,7 +9,7 @@ Ks = [Cyclotomic(c) for c in cs]
 
 def asympt_beta_eq(beta, K):
     d = K.deg
-    return beta + (log(abs(K.disc)) - d*log(d))*beta/(d*(log(beta/(2*pi))-1)) + d - 1
+    return beta + (log(abs(K.disc)) - d*log(d))*beta/(d*(log(beta/(2*pi))-2)) + d - 1
 
 writer = csv.writer(open("data/asympt_gain.csv", 'w'))
 writer.writerow(['beta', 'beta_eq1' , 'beta_eq3' , 'beta_eq4' , 'beta_eq5' , 'beta_eq7' , 'beta_eq8' , 'beta_eq9' , 'beta_eq11', 'beta_eq13', 'beta_eq15', 'beta_eq16', 'beta_eq17', 'beta_eq32'])
