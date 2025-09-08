@@ -25,7 +25,7 @@ def I(a):
 
 def random_qary(m, n, q):
     """
-    Returns the basis of a random q-ary lattice with m variables and n equation mod q
+    Returns the basis of a random q-ary lattice with m variables and n equations mod q
     """    
     assert(m >= n)
     A = randint(0, q-1, (m-n, n))
@@ -35,7 +35,7 @@ def random_qary(m, n, q):
 def random_qary_cyclotomic(K, m, n, q):
     """
     Returns the basis of a random q-ary module-lattice over K 
-    with m variables and n equation mod q*O_K
+    with m variables and n equations mod q*O_K
     """    
     A = array([random_qary(m, n, q) for i in range(K.deg)])
     A[1:,:n,:] = 0; A[1:,:,n:] = 0
