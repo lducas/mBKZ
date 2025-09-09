@@ -258,7 +258,7 @@ class Cyclotomic:
         """
         Returns a Z-basis of the ideal v * O_K for an input vector v ∈ K^r.
         We here use the power-basis of cyclotomics: B = [v, v*X, v*X^2, ... , v*X^{deg-1}],
-        and this guarentee is used to construct LWE samples.
+        and this guarantee is used to construct LWE samples.
 
         :param v: v ∈ K^r, represented in the Cyclic Embedding
         :returns: a list of K.deg elements of v ∈ K^r, represented in the Cyclic Embedding
