@@ -35,7 +35,6 @@ def lghK(K, r):
     # for even conductors.
     #return lghZ(K.deg*r) + log(K.cond)/(K.deg*r) 
 
-
 def avg_lskewness(K, r, estimate="spherical model"):
     """
     Estimate the average log skewness term in the slope equation (Term t_3)
@@ -57,9 +56,6 @@ def avg_lskewness(K, r, estimate="spherical model"):
         return logNbb/(2*d) + log(d)/2
 
     raise ValueError(f"skewness estimate method '{estimate}' not recognized")
-
-
-
 
 def avg_lindex(K, r, estimate="density estimate"):
     """

@@ -1,5 +1,4 @@
-for c in 1 3 4 5 8 15 16; do
-	for seed in {0..4}; do
-		python3 exp_slope.py c=${c} ft=dd m=240 > ./data/slopes_240/slope_c${c}_seed${seed}.csv &
-	done
+for seed in {0..20}; do
+	python3 exp_lwe.py n=120 ft=dd verb=0 struct=1 > ./data/lwe_120/struct_seed${seed}.csv &
+	python3 exp_lwe.py n=120 ft=dd verb=0 struct=0 > ./data/lwe_120/nostruct_seed${seed}.csv &
 done

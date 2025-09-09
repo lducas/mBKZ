@@ -13,11 +13,12 @@ from modlatred import random_qary_cyclotomic, ModuleLatticeReduction, slope
 
 ld = "ld"
 dd = "dd"
-m = 60
+m = 160
 c = 3
 n = None
 q = 16317
 ft = "ld"
+struct=True
 
 for s in sys.argv[1:]:
     exec(s)
@@ -47,7 +48,11 @@ while True:
     trials += 1
     try:
         B = random_qary_cyclotomic(K, m//K.deg, n//K.deg, q)
-        mlr = ModuleLatticeReduction(B, K, float_type=ft, restructure_delta_prog=.03)
+        if struct:
+            mlr = ModuleLatticeReduction(B, K, float_type=ft, restructure_delta_prog=.03)
+        else:
+            Q = Cyclotomic(1)
+            mlr = ModuleLatticeReduction(B, Q, float_type=ft)
         for t in range(5):
             mlr.lll(0, m, delta=.99)
             mlr.restructure()
@@ -59,7 +64,7 @@ while True:
         print(f"{sys.argv[0]}: m={m}, n={n}, q={q}, cond={K.cond}, deg={K.deg}, ft={ft}", file=sys.stderr)
 
 
-tours = 5*K.deg
-for beta in range(ceil(5/K.deg)*K.deg, 81, K.deg):
+tours = 5*mlr.K.deg
+for beta in range(ceil(5/mlr.K.deg)*mlr.K.deg, 81, mlr.K.deg):
     mlr.bkz(beta, tours)
     barf(beta, tours)
