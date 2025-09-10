@@ -1,0 +1,44 @@
+\documentclass[preview, border=0]{standalone}
+\usepackage{amsmath}
+\usepackage{subfig}
+\usepackage{pgfplots}
+\usepackage{amssymb}
+\pgfplotsset{compat=newest}
+\input{cyclostyle}
+\usepgfplotslibrary{fillbetween}
+
+\def\legendpos{legend pos=north west,legend cell align=left}
+
+\newcommand\plotSlope[4]{%
+	\addplot[#1,opacity=0.5,mark=#2,mark size=2pt,mark repeat=10,mark options={solid}]
+		table [col sep=comma,x=walltime,y=slope]
+		{../data/#3#4.csv}; 
+}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[xlabel=$\beta$, xmin=45, xmax=70, ymax=-0.022, ymin=-0.026,
+			ylabel=${\operatorname{slope}_{\mathbb Q}(\operatorname{BKZ}^{\beta})}$, 
+			width=\textwidth,height=.618\textwidth,
+			scaled y ticks=false,
+			ytick={-.026,-.024,-.022, -0.020},
+			yticklabels={$-0.026$,$-0.024$, $-0.022$, $-0.020$},					
+			\legendpos]
+	\addplot[color=\colone, mark=\markone, mark size=3pt]
+		table [col sep=comma,x=beta,y=slope_Q] {../data/slopes_240/nostruct_slope_c1_avg.csv};
+	\addplot[color=\colthree, mark=\markthree, mark size=3pt]
+		table [col sep=comma,x=beta,y=slope_Q] {../data/slopes_240/nostruct_slope_c3_avg.csv};
+	\addplot[color=\colfive, mark=\markfive, mark size=3pt]
+		table [col sep=comma,x=beta,y=slope_Q] {../data/slopes_240/nostruct_slope_c5_avg.csv};
+	\addplot[color=\colfifteen, mark=\markfifteen, mark size=2.5pt]
+		table [col sep=comma,x=beta,y=slope_Q] {../data/slopes_240/nostruct_slope_c15_avg.csv};
+
+
+	\addlegendentry{$\mathbb Q$}
+	\addlegendentry{$\mathbb Q(\omega_3)$}
+	\addlegendentry{$\mathbb Q(\omega_5)$}
+	\addlegendentry{$\mathbb Q(\omega_{15})$}
+
+\end{axis}	
+\end{tikzpicture}
+\end{document}
