@@ -2,7 +2,8 @@
 Artifact for the paper _Predicting Module-Lattice Reduction_
 by Léo Ducas, Lynn Engelberts and Paola de Perthuis. 
 
-Pre-pre-print included on this repository (`mBKZ_paper.pdf`). Pre-print soon available on IACR eprint archive. Slides presenting this work may be found in the `slides/` directory. 
+This paper is accepted for publication in ASIACRYPT 2025. The full version is available on the IACR Cryptology ePrint Archive: https://eprint.iacr.org/2025/1904. 
+Slides presenting this work may be found in the `slides/` directory. 
 
 ## Integrated artifacts
 
@@ -12,7 +13,7 @@ The paper contains clickable hyperlinks marked [.py], which link directly to spe
 The following packages should be installed systemwide
 `autoconf, automake, libtool, virtualenv, libgmp-dev, libmpfr-dev, libqd-dev`.
 
-The following will install libraries `g6k`, `fpylll` and `fplll` in a virtual environment:
+The following will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
 ```
 git submodule add "https://github.com/fplll/g6k"
