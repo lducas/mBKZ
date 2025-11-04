@@ -74,4 +74,6 @@ The file `cyclotomics.py` contains utility functions to deal with cyclotomic fie
 
 The file `modlatred.py` contains our implementation of module-BKZ.
 
-The file `predictions.py` contains the prediction formulas from our paper.
+The file `predictions.py` contains the prediction formulae from our paper.
+
+The file `asympt_gain.py` contains our formula for the asymptotic relationship between mBKZ and BKZ blocksizes. 
