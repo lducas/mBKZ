@@ -6,7 +6,7 @@ This paper is accepted for publication in ASIACRYPT 2025, with the full version 
 Slides presenting this work may be found in the `slides/` directory. 
 
 The code will namely allow: 
-- to run the module-BKZ algorithm on random q-ary modules on cyclotomic number fields of low degree;
+- to run the module-BKZ algorithm on random q-ary module lattices on cyclotomic number fields of low degree;
 - to output our predictions for slopes, blocksizes, as well as specific terms added up in the slopes;
 - to trace our asymptotic predictions for blocksizes. 
 
