@@ -21,6 +21,8 @@ cd g6k
 PYTHON=python3 ./bootstrap.sh
 cd ..
 ```
+Note that the execution of `./bootstrap.sh` may take a long time. 
+
 To run the python scripts, you will need to activate the virtual environment using:
 ```
 cd g6k
@@ -29,6 +31,8 @@ cd ..
 ```
 
 ## Running experiments, examples
+
+Please note that the examples provided here may take hours to run. 
 
 To generate a csv file with the profile of mBKZ over Q(ω_3), Q-dimension 120, after 5 tours of BKZ-12, run:
 ```
