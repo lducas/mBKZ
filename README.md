@@ -16,7 +16,7 @@ The following packages should be installed systemwide
 The following will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
 ```
-git submodule add "https://github.com/fplll/g6k"
+git clone --recurse-submodules git@github.com:lducas/mBKZ.git
 cd g6k
 PYTHON=python3 ./bootstrap.sh
 cd ..
