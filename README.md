@@ -28,7 +28,7 @@ cd ..
 ```
 Note that the execution of `./bootstrap.sh` may take a long time. 
 
-To run the python scripts, you will need to activate the virtual environment using:
+To run the python scripts, you will need to activate the virtual environment `g6k-env` using:
 ```
 cd g6k
 source ./activate
