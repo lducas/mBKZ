@@ -1,13 +1,18 @@
 # Module-BKZ
-Artifact for the paper _Predicting Module-Lattice Reduction_
+Artefact for the paper _Predicting Module-Lattice Reduction_
 by Léo Ducas, Lynn Engelberts and Paola de Perthuis. 
 
-This paper is accepted for publication in ASIACRYPT 2025. The full version is available on the IACR Cryptology ePrint Archive: https://eprint.iacr.org/2025/1904. 
+This paper is accepted for publication in ASIACRYPT 2025, with the full version available on the IACR Cryptology ePrint Archive: https://eprint.iacr.org/2025/1904. 
 Slides presenting this work may be found in the `slides/` directory. 
+
+The code will namely allow: 
+- to run the module-BKZ algorithm on random q-ary modules on cyclotomic number fields of low degree;
+- to output our predictions for slopes, blocksizes, as well as specific terms added up in the slopes;
+- to trace our asymptotic predictions for blocksizes. 
 
 ## Integrated artifacts
 
-The paper contains clickable hyperlinks marked [.py], which link directly to specific files and lines of our artifacts corresponding to the current formula, feature or technicality discussed at that point of the paper.
+The paper contains clickable hyperlinks marked [.py], pointing to specific lines of our artefact corresponding to the formulae referenced at that point of the paper, and used to generate its figures.
 
 ## Installation
 The following packages should be installed systemwide
