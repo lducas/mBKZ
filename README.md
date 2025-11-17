@@ -1,5 +1,5 @@
 # Module-BKZ
-Artefact for the paper _Predicting Module-Lattice Reduction_
+Artifact for the paper _Predicting Module-Lattice Reduction_
 by Léo Ducas, Lynn Engelberts and Paola de Perthuis. 
 
 This paper is accepted for publication in ASIACRYPT 2025, with the full version available on the IACR Cryptology ePrint Archive: https://eprint.iacr.org/2025/1904. 
@@ -12,7 +12,7 @@ The code will namely allow:
 
 ## Integrated artifacts
 
-The paper contains clickable hyperlinks marked [.py], pointing to specific lines of our artefact corresponding to the formulae referenced at that point of the paper, and used to generate its figures.
+The paper contains clickable hyperlinks marked [.py], pointing to specific lines in our artifact corresponding to the formulae referenced at that point in the paper and used to generate the figures.
 
 ## Installation
 The following packages should be installed systemwide
