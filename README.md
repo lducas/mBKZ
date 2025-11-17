@@ -1,24 +1,28 @@
 # Module-BKZ
-Artifact for the paper _Predicting Module-Lattice Reduction_
-by Léo Ducas, Lynn Engelberts and Paola de Perthuis. 
+Artifact for the paper _Predicting Module-Lattice Reduction_ by Léo Ducas, Lynn Engelberts, and Paola de Perthuis. 
 
 This paper is accepted for publication in ASIACRYPT 2025, with the full version available on the IACR Cryptology ePrint Archive: https://eprint.iacr.org/2025/1904. 
 Slides presenting this work may be found in the `slides/` directory. 
 
-The code will namely allow: 
-- to run the module-BKZ algorithm on random q-ary module lattices on cyclotomic number fields of low degree;
-- to output our predictions for slopes, blocksizes, as well as specific terms added up in the slopes;
-- to trace our asymptotic predictions for blocksizes. 
+This artifact provides an implementation of the module-BKZ algorithm and the prediction framework from the paper. 
+It allows users to: 
+- run the module-BKZ algorithm on random q-ary module lattices over cyclotomic number fields of low degree;
+- reproduce the paper's concrete predictions for slopes and blocksizes, including the individual terms contributing to the slopes;
+- reproduce the paper's asymptotic predictions for the blocksizes.
 
-## Integrated artifacts
+The repository also includes the CSV data files used to generate the figures in the paper. 
+
+## Integrated artifact
 
 The paper contains clickable hyperlinks marked [.py], pointing to specific lines in our artifact corresponding to the formulae referenced at that point in the paper and used to generate the figures.
 
 ## Installation
-The following packages should be installed systemwide
-`autoconf, automake, libtool, virtualenv, libgmp-dev, libmpfr-dev, libqd-dev`.
+The following packages should be installed system-wide: 
+`autoconf, automake, libtool, virtualenv, libgmp-dev, libmpfr-dev, libqd-dev`. 
 
-The following will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
+The file `requirements.txt` lists the Python dependencies. 
+
+The following command will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
 ```
 git clone --recurse-submodules git@github.com:lducas/mBKZ.git
@@ -26,9 +30,9 @@ cd g6k
 PYTHON=python3 ./bootstrap.sh
 cd ..
 ```
-Note that the execution of `./bootstrap.sh` may take a long time. 
+Note that the execution of `./bootstrap.sh` may take a long time. It creates a virtual environment `g6k-env` in the `g6k` directory. 
 
-To run the python scripts, you will need to activate the virtual environment `g6k-env` using:
+To run the Python scripts, you will need to activate the virtual environment `g6k-env` using:
 ```
 cd g6k
 source ./activate
