@@ -22,7 +22,7 @@ The following packages should be installed system-wide:
 
 The file `requirements.txt` lists the Python dependencies. 
 
-The following command will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
+The following command installs the libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
 ```
 git clone --recurse-submodules https://github.com/lducas/mBKZ.git
