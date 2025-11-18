@@ -25,12 +25,16 @@ The file `requirements.txt` lists the Python dependencies.
 The following command will install libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
 ```
-git clone --recurse-submodules git@github.com:lducas/mBKZ.git
+git clone --recurse-submodules https://github.com/lducas/mBKZ.git
 cd g6k
 PYTHON=python3 ./bootstrap.sh
 cd ..
 ```
-Note that the execution of `./bootstrap.sh` may take a long time. It creates a virtual environment `g6k-env` in the `g6k` directory. 
+For SSH access, replace the first line with: 
+```
+git clone --recurse-submodules git@github.com:lducas/mBKZ.git
+``` 
+Note that the execution of `./bootstrap.sh` may take a long time. It creates a virtual environment `g6k-env` inside the `g6k` directory. 
 
 To run the Python scripts, you will need to activate the virtual environment `g6k-env` using:
 ```
