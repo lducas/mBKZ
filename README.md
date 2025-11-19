@@ -20,7 +20,7 @@ The paper contains clickable hyperlinks marked [.py], pointing to specific lines
 The following packages should be installed system-wide: 
 `autoconf, automake, libtool, virtualenv, libgmp-dev, libmpfr-dev, libqd-dev`. 
 
-The file `requirements.txt` lists the Python dependencies. 
+The file `requirements.txt` lists dependencies. 
 
 The following command installs the libraries `g6k`, `fpylll`, and `fplll` in a virtual environment:
 
