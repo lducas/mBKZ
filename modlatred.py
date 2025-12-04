@@ -112,7 +112,7 @@ class ModuleLatticeReduction(Siever):
         This is done by checking that B[kappa] * O_K is a sublattice of 
         B[kappa .. kappa+deg-1]. We call Babai merely for expressing vectors in
         basis B. 
-        :param kappa: Position at which to test the module structur
+        :param kappa: Position at which to test the module structure
         :param end: Ignore the basis beyond that index; an optimization that can 
                     be used when we have been working in a limited range
         :param ret_w: Option to return a counterexample
