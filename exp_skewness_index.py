@@ -12,6 +12,7 @@ from numpy.linalg import slogdet
 from numpy import array
 from predictions import avg_lskewness, avg_lindex
 
+
 c = 3
 q = 16317
 ft = "ld"
