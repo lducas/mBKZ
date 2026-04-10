@@ -1,8 +1,6 @@
 import sys
 sys.path.insert(1, './g6k')
 
-from fpylll import Enumeration, EvaluatorStrategy
-from fpylll.fplll.enumeration import EnumerationError
 
 from numpy import array, block, identity, zeros, roll, reshape, where
 from numpy.random import randint
@@ -295,28 +293,4 @@ class ModuleLatticeReduction(Siever):
         """        
         prof_Q = self.profile_Q(rescale)
         return [sum(prof_Q[i:i+self.K.deg]) for i in range(0, self.M.d, self.K.deg)]
-
-    def enumerate_all_short_vectors(self, sq_rad):
-        """
-        Output a list of (almost) all vectors of squared euclidean
-        norm less than sq_rad.
-        """
-        n = self.M.d
-        workout(self, dummy_tracer, 0, n, 0)
-
-        nr_solutions = 100
-        res = []
-        while nr_solutions < 101 or len(res) == nr_solutions:
-            nr_solutions *= 2
-            enum = Enumeration(self.M, 
-                strategy=EvaluatorStrategy.FIRST_N_SOLUTIONS, 
-                nr_solutions=nr_solutions)
-            try:
-                res = enum.enumerate(0, n, sq_rad, 0)
-            except EnumerationError:
-                pass
-
-        svs = [self.M.B.multiply_left(x) for (_, x) in res]
-        self.restructure()
-        return svs
 
