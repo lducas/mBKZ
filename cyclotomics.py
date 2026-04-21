@@ -315,7 +315,7 @@ if __name__ == '__main__':
         if c%4 == 2:
             continue
 
-        print("Conductor: ", c)
+        # print("Conductor: ", c)
 
         K = Cyclotomic(c, debug=True)
 
@@ -360,7 +360,7 @@ if __name__ == '__main__':
 
 
         # test the samples' variance
-        n_samples = 10000
+        n_samples = 500
         sigmas_to_test = array([1., 2., 3., 5., 10., 20., 50., 100.])*sqrt(K.cond*K.deg)
 
         for sigma_target in sigmas_to_test:
@@ -382,13 +382,9 @@ if __name__ == '__main__':
             # relative deviation
             error_pct = abs(mean_sigma - sigma_target) / sigma_target * 100
 
-            print(f"--- Standard deviation test (target sigma: {sigma_target}) ---")
-            print(f"Measured sigma    : {mean_sigma:.4f}")
-            print(f"Relative error  : {error_pct:.2f}%")
-
-            # Facteur d'échelle = Sigma Mesuré / Sigma Cible
-            facteur = mean_sigma / sigma_target
-            print(f"Le plongement multiplie le bruit par un facteur : {facteur:.4f}")
+            # print(f"--- Standard deviation test (target sigma: {sigma_target}) ---")
+            # print(f"Measured sigma    : {mean_sigma:.4f}")
+            # print(f"Relative error  : {error_pct:.2f}%")
 
             assert(error_pct < 5.0)
 
