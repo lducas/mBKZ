@@ -363,28 +363,31 @@ if __name__ == '__main__':
         n_samples = 500
         sigmas_to_test = array([1., 2., 3., 5., 10., 20., 50., 100.])*sqrt(K.cond*K.deg)
 
-        for sigma_target in sigmas_to_test:
+        for sigma in sigmas_to_test:
 
-            all_samples = []
+            all_norms = []
             r = 2 # rank
 
             for _ in range(n_samples):
                 # flattened vector
-                sample = K.spherical_sample(r, sigma=sigma_target)
-                all_samples.append(sample)
+                v = K.spherical_sample(r, sigma=sigma)
+                all_norms.append(K.trace(K.ip_K(v, v)))
 
-            all_samples = array(all_samples)
-
+            avg_norm = mean(all_norms)
+            pred_norm = K.deg * r * sigma**2
             # Empirical standard deviation
-            emp_sigma_per_coordinate = std(all_samples, axis=0)
-            mean_sigma = mean(emp_sigma_per_coordinate)
 
             # relative deviation
-            error_pct = abs(mean_sigma - sigma_target) / sigma_target * 100
+            error_pct = abs(avg_norm - pred_norm) / pred_norm * 100
 
-            # print(f"--- Standard deviation test (target sigma: {sigma_target}) ---")
-            # print(f"Measured sigma    : {mean_sigma:.4f}")
-            # print(f"Relative error  : {error_pct:.2f}%")
+            #print(f"--- Standard deviation test (target sigma: {sigma}) ---")
+            #print(f"Measured sigma    : {mean_sigma:.4f}")
+            #print(f"Relative error  : {error_pct:.2f}%")
+
+            print("cond: ", K.cond)
+            print(r, K.deg, sigma)
+            print(avg_norm)
+            print(pred_norm)
 
             assert(error_pct < 5.0)
 
