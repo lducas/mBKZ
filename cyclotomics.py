@@ -157,7 +157,8 @@ class Cyclotomic:
         :param sigma: (optional) Gaussian width of the element
         :returns: a spherically symmetric sample of K^r
         """
-        pre_embed_sigma = sigma / (sqrt(self.deg * self.cond))
+        pre_embed_sigma = sigma / sqrt(self.cond)
+        # / (sqrt(self.deg * self.cond))
         # threshold to adopt either a random walk (when sigma is small) or a Sheppard correction (when it is bigger)
         variance_threshold = 10.0
 
@@ -360,8 +361,8 @@ if __name__ == '__main__':
 
 
         # test the samples' variance
-        n_samples = 500
-        sigmas_to_test = array([1., 2., 3., 5., 10., 20., 50., 100.])*sqrt(K.cond*K.deg)
+        n_samples = 1000
+        sigmas_to_test = array([1., 2., 3., 5., 10., 20., 50., 100.])*sqrt(K.cond)
 
         for sigma in sigmas_to_test:
 
