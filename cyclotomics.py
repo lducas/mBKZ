@@ -1,5 +1,5 @@
 from numpy.fft import fft, ifft
-from numpy import array, allclose, rint, zeros, reshape, roll, prod, sqrt, polymul, polydiv, std, mean
+from numpy import outer, identity, array, allclose, rint, zeros, reshape, roll, prod, sqrt, polymul, polydiv, std, mean
 from numpy.random import normal, binomial
 from cyclo_primes_precomp import cyclo_primes
 from math import pi, log
@@ -315,6 +315,7 @@ if __name__ == '__main__':
     for c in range(3, 40):
         if c%4 == 2:
             continue
+        print("c = ", c)
 
         # print("Conductor: ", c)
 
@@ -369,28 +370,19 @@ if __name__ == '__main__':
             all_norms = []
             r = 2 # rank
 
+            Cov = zeros((r*K.deg, r*K.deg))
             for _ in range(n_samples):
                 # flattened vector
                 v = K.spherical_sample(r, sigma=sigma)
-                all_norms.append(K.trace(K.ip_K(v, v)))
-
-            avg_norm = mean(all_norms)
-            pred_norm = K.deg * r * sigma**2
-            # Empirical standard deviation
-
-            # relative deviation
-            error_pct = abs(avg_norm - pred_norm) / pred_norm * 100
-
-            #print(f"--- Standard deviation test (target sigma: {sigma}) ---")
-            #print(f"Measured sigma    : {mean_sigma:.4f}")
-            #print(f"Relative error  : {error_pct:.2f}%")
-
-            print("cond: ", K.cond)
-            print(r, K.deg, sigma)
-            print(avg_norm)
-            print(pred_norm)
-
-            assert(error_pct < 5.0)
+                # Construct the real embedding
+                vb = reshape(v, (len(v)//c, c))
+                vbR = [K.complex_embeddings(x)[:K.deg//2].real for x in vb]
+                vbI = [K.complex_embeddings(x)[:K.deg//2].imag for x in vb]
+                vE = array(vbR + vbI).flatten()
+                Cov += 2 * outer(vE, vE) #*2 because we reoved half the embeddings
+            Cov /= n_samples * sigma ** 2
+            error_pct = mean(abs(Cov - identity(r*K.deg)).flatten()) 
+            assert(error_pct < .05)
 
 
     print("Cyclotomic tests all passed.")
