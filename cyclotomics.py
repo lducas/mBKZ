@@ -151,8 +151,8 @@ class Cyclotomic:
 
     def spherical_sample(self, r, sigma = 100.):
         """
-        Sample a spherically symmetric elements of K^r, represented in the
-        Cyclic Embedding. The output vector has length r*K.cond.
+        Sample a somewhat spherically symmetric elements of K^r, represented in the
+        Cyclic Embedding. The output vector has length r*K.cond. 
         :param r: rank over K of the element to be sampled
         :param sigma: (optional) Gaussian width of the element
         :returns: a spherically symmetric sample of K^r
